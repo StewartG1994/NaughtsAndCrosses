@@ -6,6 +6,9 @@ const player = (player, option) =>{
 
 const gameboard = (() => {
 
+    const playerOneInput = document.getElementById('playerOne');
+    const playerTwoInput = document.getElementById('playerTwo');
+
     const winningSequences = 
     [
         [0,1,2],
@@ -17,5 +20,11 @@ const gameboard = (() => {
         [0,4,8],
         [2,4,6]
     ]
+
+    const winCheck = (array) => {
+       winningSequences.forEach(item => {
+        if (item.every(elem => array.includes(elem))){console.log('compareCheck')}
+       })
+    }
 }
 )();

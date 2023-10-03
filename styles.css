@@ -89,3 +89,9 @@ justify-content: center;
 .cell:hover{
     background-color: gray;
 }
+
+input[type=text]{
+    margin-top: 5px;
+    border-style: none;
+    border-bottom: 2px solid gray;
+}
