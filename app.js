@@ -13,8 +13,7 @@ const gameboard = (() => {
     let counter = 0;
     let playerOne = null
     let playerTwo = null
-    let playerOneTurn = true;
-    let playerTwoTurn = false;
+
 
     const winningSequences = 
     [
@@ -49,25 +48,40 @@ const gameboard = (() => {
 
     const playGame = () =>{
         playerInfo()
-
-        if(playerOneTurn === true){
+        let playerOneTurn = true;
+        let playerTwoTurn = false;
 
         Array.from(cell).forEach(cell =>{
-            console.log(cell)
             cell.addEventListener('click', () =>{
                 console.log(cell)
 
-                cell.textContent = playerOne.option
-                playerOneTurn = false
-                return                
+                if (cell.textContent === 'X' || cell.textContent === 'O') 
+                {
+                    console.log('cellcheck')
+                    return}
+
+                else if (playerOneTurn) {
+                    cell.textContent = playerOne.option;
+                    let dataNumber = cell.getAttribute('data-value')
+                    let parsedData = parseInt(dataNumber)
+                    playerOne.array.push(parsedData);
+                    winCheck(playerOne.array)
+                    console.log(playerOne);
+                    playerOneTurn = false;
+                    playerTwoTurn = true;
+                }
+                
+                else if (playerTwoTurn) {
+                    cell.textContent = playerTwo.option; 
+                    playerOneTurn = true;
+                    playerTwoTurn = false;
+                    
+                  }
+
             })
-        })}
+        })
 
-        else{console.log('test')}
-  }
-
-
-
+    }
     return {playGame}
 }
 )();
