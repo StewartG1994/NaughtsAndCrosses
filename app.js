@@ -8,6 +8,8 @@ const gameboard = (() => {
 
     const playerOneInput = document.getElementById('playerOne');
     const playerTwoInput = document.getElementById('playerTwo');
+    const textarea = document.querySelector('.textarea')
+
     const cell = document.querySelectorAll('.cell')
     const playButton = document.getElementById('playBtn')
     let counter = 0;
@@ -44,6 +46,8 @@ const gameboard = (() => {
             event.preventDefault()
             playerOne = player(playerOneInput.value , 'X')
             playerTwo = player(playerTwoInput.value , 'O')
+            textarea.textContent = playerOne.player + 'its your turn first!'
+
 
             console.log(playerOne,playerTwo)
 
