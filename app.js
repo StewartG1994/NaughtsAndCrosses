@@ -33,6 +33,11 @@ const gameboard = (() => {
        })
     }
 
+    const drawCheck = (counter) =>{
+        if (counter = 9) {console.log('draw')}
+        else {counter++}
+    }
+
     const playerInfo = () =>{
 
         playButton.addEventListener('click', () =>{
@@ -66,6 +71,7 @@ const gameboard = (() => {
                     let parsedData = parseInt(dataNumber)
                     playerOne.array.push(parsedData);
                     winCheck(playerOne.array)
+                    drawCheck(counter)
                     console.log(playerOne);
                     playerOneTurn = false;
                     playerTwoTurn = true;
