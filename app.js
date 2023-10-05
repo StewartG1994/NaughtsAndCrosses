@@ -29,15 +29,25 @@ const gameboard = (() => {
         [2,4,6]
     ]
 
-    const winCheck = (array) => {
+    const clearBoard = () =>{
+        playerOneInput.textContent = '';
+        playerTwoInput.textContent = '';
+        Array.from(cell).forEach(cell =>{ cell.textContent = '';})
+
+
+    }
+
+    const winCheck = (array , playerC) => {
        winningSequences.forEach(item => {
-        if (item.every(elem => array.includes(elem))){console.log('compareCheck')}
+        if (item.every(elem => array.includes(elem))){
+            textarea.textContent = playerC.player + ' has won'
+            setTimeout(clearBoard, 5000)
+        }
        })
     }
 
     const drawCheck = (counter) =>{
-        if (counter = 9) {console.log('draw')}
-        else {counter++}
+        if (counter === 9) {console.log('draw')}
     }
 
     const playerInfo = () =>{
@@ -46,7 +56,7 @@ const gameboard = (() => {
             event.preventDefault()
             playerOne = player(playerOneInput.value , 'X')
             playerTwo = player(playerTwoInput.value , 'O')
-            textarea.textContent = playerOne.player + 'its your turn first!'
+            textarea.textContent = playerOne.player + ' its your turn first!'
 
 
             console.log(playerOne,playerTwo)
@@ -70,22 +80,32 @@ const gameboard = (() => {
                     return}
 
                 else if (playerOneTurn) {
+                    counter++
                     cell.textContent = playerOne.option;
                     let dataNumber = cell.getAttribute('data-value')
                     let parsedData = parseInt(dataNumber)
                     playerOne.array.push(parsedData);
-                    winCheck(playerOne.array)
                     drawCheck(counter)
-                    console.log(playerOne);
                     playerOneTurn = false;
                     playerTwoTurn = true;
+                    textarea.textContent = playerTwo.player + ' its your turn!'   
+                    winCheck(playerOne.array, playerOne)
+
+
                 }
                 
                 else if (playerTwoTurn) {
+                    counter++
                     cell.textContent = playerTwo.option; 
+                    let dataNumber = cell.getAttribute('data-value')
+                    let parsedData = parseInt(dataNumber)
+                    playerTwo.array.push(parsedData);
+                    drawCheck(counter)
                     playerOneTurn = true;
                     playerTwoTurn = false;
-                    
+                    textarea.textContent = playerOne.player + ' its your turn!'
+                    winCheck(playerTwo.array, playerTwo)
+
                   }
 
             })
